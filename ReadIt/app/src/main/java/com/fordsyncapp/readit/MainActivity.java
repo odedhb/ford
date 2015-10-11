@@ -47,13 +47,21 @@ public class MainActivity extends ActionBarActivity {
                 ((TextView) findViewById(R.id.main_view)).setText(text);
 
                 TextFetcher.saveLastWebsite(MainActivity.this, text);
-                SdlService.getInstance().readText(text);
+                SdlService.getInstance().readText(TextFetcher.getLastWebsite(MainActivity.this));
             }
         }.run(this);
     }
 
     public void play(View view) {
         SdlService.getInstance().readText(TextFetcher.getLastWebsite(this));
+    }
+
+    public void playSports(View view) {
+        fetchUrl("http://sports.yahoo.com/blogs/nfl-shutdown-corner/nfl--greg-hardy-comments--do-not-reflect-values-of-the-league-145138531.html");
+    }
+
+    public void playTech(View view) {
+        fetchUrl("http://www.engadget.com/2015/10/08/chromecast-review-2015/");
     }
 
 //    private void fordSpeak(String ttsText) {
