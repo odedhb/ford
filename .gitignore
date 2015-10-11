@@ -40,8 +40,6 @@ ReadIt/gradle/wrapper/gradle-wrapper.properties
 
 ReadIt/gradle/wrapper/gradle-wrapper.jar
 
-ReadIt/gradle.properties
-
 ReadIt/gradlew.bat
 
 ReadIt/app/src/androidTest/java/com/fordsyncapp/readme/ApplicationTest.java
@@ -50,11 +48,7 @@ ReadIt/ReadMe.iml
 
 ReadIt/app/src/test/java/com/fordsyncapp/readme/ExampleUnitTest.java
 
-ReadIt/settings.gradle
-
 ReadIt/app/proguard-rules.pro
-
-ReadIt/gradle.properties
 
 ReadIt/gradle/wrapper/gradle-wrapper.jar
 
@@ -65,8 +59,6 @@ ReadIt/gradlew
 ReadIt/gradlew.bat
 
 ReadIt/ReadIt.iml
-
-ReadIt/settings.gradle
 
 ReadIt/app/src/test/java/com/fordsyncapp/readit/ExampleUnitTest.java
 
