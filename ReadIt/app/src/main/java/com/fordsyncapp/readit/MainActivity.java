@@ -28,7 +28,6 @@ public class MainActivity extends ActionBarActivity {
         });
         String url = sites.get(0).getUrl();*/
 
-
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
@@ -41,18 +40,6 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
-
-        Matcher matcher = Patterns.WEB_URL.matcher(sharedText);
-        String url = matcher.group(1);
-//        "http://www.engadget.com/2015/10/08/elon-musk-apple-car-diss/"
-
-        Toast.makeText(this, "Loading " + url, Toast.LENGTH_SHORT).show();
-
-        readUrl(url);
-    }
 
     private void readUrl(String url) {
         new TextFetcher(url) {
