@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ReadIt</string>
+    <string name="app_name">ReadIt Ford</string>
+    <string name="title_activity_main">Read It!</string>
 </resources>
