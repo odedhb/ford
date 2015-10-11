@@ -3,6 +3,8 @@
     package="com.fordsyncapp.readit">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
 
@@ -27,6 +29,18 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+
+        <service android:name="com.fordsyncapp.readit.SdlService"></service>
+
+
+        <receiver android:name="com.fordsyncapp.readit.SdlReceiver">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

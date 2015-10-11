@@ -28,6 +28,10 @@ public class MainActivity extends ActionBarActivity {
         });
         String url = sites.get(0).getUrl();*/
 
+
+        Intent startIntent = new Intent(this, SdlService.class);
+        startService(startIntent);
+
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
