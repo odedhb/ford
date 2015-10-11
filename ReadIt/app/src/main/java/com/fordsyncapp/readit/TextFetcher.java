@@ -44,6 +44,7 @@ public abstract class TextFetcher {
     public static String getLastWebsite(Context context) {
         String lastText = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(LAST_WEBSITE_TEXT_KEY, "Please point to some website so I can read it to you");
+        lastText = lastText.substring(0, 450);
         return lastText;
     }
 

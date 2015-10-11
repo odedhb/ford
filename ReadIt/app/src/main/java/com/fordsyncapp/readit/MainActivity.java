@@ -47,13 +47,13 @@ public class MainActivity extends ActionBarActivity {
                 ((TextView) findViewById(R.id.main_view)).setText(text);
 
                 TextFetcher.saveLastWebsite(MainActivity.this, text);
+                SdlService.getInstance().readText(text);
             }
         }.run(this);
     }
 
     public void play(View view) {
-        Intent startIntent = new Intent(this, SdlService.class);
-        startService(startIntent);
+        SdlService.getInstance().readText(TextFetcher.getLastWebsite(this));
     }
 
 //    private void fordSpeak(String ttsText) {

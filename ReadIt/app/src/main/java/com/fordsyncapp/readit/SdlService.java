@@ -359,7 +359,6 @@ public class SdlService extends Service implements IProxyListenerALM {
         try {
             //Set the welcome message on screen
             String lastWebSiteText = TextFetcher.getLastWebsite(getApplicationContext());
-            lastWebSiteText = lastWebSiteText.substring(0, 450);
             proxy.show(APP_NAME, lastWebSiteText, TextAlignment.CENTERED, autoIncCorrId++);
 
             //Say the welcome message
@@ -791,13 +790,13 @@ public class SdlService extends Service implements IProxyListenerALM {
 
     void readText(String ttsText) {
         try {
-//            proxy.show(ttsText,ttsText, TextAlignment.CENTERED, autoIncCorrId++);
 
             if (proxy == null) {
                 startProxy();
             }
 
             proxy.speak(ttsText, 2376);
+            proxy.show("Reading", ttsText, TextAlignment.CENTERED, autoIncCorrId++);
         } catch (SdlException e) {
             throw new RuntimeException(e);
         }
