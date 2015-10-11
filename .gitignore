@@ -26,4 +26,34 @@ proguard/
 # Log Files
 *.log
 
-SyncApp/.idea/
+ReadMe/.idea/
+
+ReadMe/app/app.iml
+
+SyncApp/.idea/workspace.xml
+
+SyncApp/.idea/vcs.xml
+
+ReadMe/gradlew
+
+ReadMe/gradle/wrapper/gradle-wrapper.properties
+
+ReadMe/gradle/wrapper/gradle-wrapper.jar
+
+ReadMe/gradle.properties
+
+ReadMe/gradlew.bat
+
+ReadMe/app/src/androidTest/java/com/fordsyncapp/readme/ApplicationTest.java
+
+ReadMe/ReadMe.iml
+
+ReadMe/build.gradle
+
+ReadMe/app/src/test/java/com/fordsyncapp/readme/ExampleUnitTest.java
+
+ReadMe/settings.gradle
+
+ReadMe/app/proguard-rules.pro
+
+ReadMe/app/build.gradle
