@@ -15,7 +15,7 @@ public class MainActivity extends ActionBarActivity {
             void onTextFetched(String text) {
                 Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
             }
-        }.run();
+        }.run(this);
     }
 
 }
