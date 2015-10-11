@@ -56,8 +56,6 @@ ReadIt/settings.gradle
 
 ReadIt/app/proguard-rules.pro
 
-ReadIt/app/build.gradle
-
 ReadIt/build.gradle
 
 ReadIt/gradle.properties
