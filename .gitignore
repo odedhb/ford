@@ -26,34 +26,56 @@ proguard/
 # Log Files
 *.log
 
-ReadMe/.idea/
+ReadIt/.idea/
 
-ReadMe/app/app.iml
+ReadIt/app/app.iml
 
-SyncApp/.idea/workspace.xml
+ReadIt/.idea/workspace.xml
 
-SyncApp/.idea/vcs.xml
+ReadIt/.idea/vcs.xml
 
-ReadMe/gradlew
+ReadIt/gradlew
 
-ReadMe/gradle/wrapper/gradle-wrapper.properties
+ReadIt/gradle/wrapper/gradle-wrapper.properties
 
-ReadMe/gradle/wrapper/gradle-wrapper.jar
+ReadIt/gradle/wrapper/gradle-wrapper.jar
 
-ReadMe/gradle.properties
+ReadIt/gradle.properties
 
-ReadMe/gradlew.bat
+ReadIt/gradlew.bat
 
-ReadMe/app/src/androidTest/java/com/fordsyncapp/readme/ApplicationTest.java
+ReadIt/app/src/androidTest/java/com/fordsyncapp/readme/ApplicationTest.java
 
-ReadMe/ReadMe.iml
+ReadIt/ReadMe.iml
 
-ReadMe/build.gradle
+ReadIt/build.gradle
 
-ReadMe/app/src/test/java/com/fordsyncapp/readme/ExampleUnitTest.java
+ReadIt/app/src/test/java/com/fordsyncapp/readme/ExampleUnitTest.java
 
-ReadMe/settings.gradle
+ReadIt/settings.gradle
 
-ReadMe/app/proguard-rules.pro
+ReadIt/app/proguard-rules.pro
 
-ReadMe/app/build.gradle
+ReadIt/app/build.gradle
+
+ReadIt/build.gradle
+
+ReadIt/gradle.properties
+
+ReadIt/gradle/wrapper/gradle-wrapper.jar
+
+ReadIt/gradle/wrapper/gradle-wrapper.properties
+
+ReadIt/gradlew
+
+ReadIt/gradlew.bat
+
+ReadIt/ReadIt.iml
+
+ReadIt/settings.gradle
+
+ReadIt/app/src/test/java/com/fordsyncapp/readit/ExampleUnitTest.java
+
+ReadIt/.idea/.name
+
+ReadIt/app/src/androidTest/java/com/fordsyncapp/readit/ApplicationTest.java
