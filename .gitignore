@@ -48,15 +48,11 @@ ReadIt/app/src/androidTest/java/com/fordsyncapp/readme/ApplicationTest.java
 
 ReadIt/ReadMe.iml
 
-ReadIt/build.gradle
-
 ReadIt/app/src/test/java/com/fordsyncapp/readme/ExampleUnitTest.java
 
 ReadIt/settings.gradle
 
 ReadIt/app/proguard-rules.pro
-
-ReadIt/build.gradle
 
 ReadIt/gradle.properties
 
