@@ -1,9 +1,14 @@
 package com.fordsyncapp.readit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.smartdevicelink.proxy.rpc.enums.TextAlignment;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,6 +26,7 @@ import java.util.List;
  */
 public abstract class TextFetcher {
 
+    private static String LAST_WEBSITE_TEXT_KEY = "LAST_WEBSITE_TEXT_KEY";
     private String url;
 
     TextFetcher(String url) {
@@ -35,6 +41,15 @@ public abstract class TextFetcher {
         new AsyncFetch(context).execute();
     }
 
+    public static String getLastWebsite(Context context) {
+        String lastText = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(LAST_WEBSITE_TEXT_KEY, "Please point to some website so I can read it to you");
+        return lastText;
+    }
+
+    public static void saveLastWebsite(Context context, String text) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(LAST_WEBSITE_TEXT_KEY, text).commit();
+    }
 
     class AsyncFetch extends AsyncTask {
 

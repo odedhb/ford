@@ -84,23 +84,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SdlService extends Service implements IProxyListenerALM{
+public class SdlService extends Service implements IProxyListenerALM {
 
-    private static final String TAG 					= "SDL Service";
+    private static final String TAG = "SDL Service";
 
-    private static final String APP_NAME 				= "ReadIt";
-    private static final String APP_ID 					= "725725";
+    private static final String APP_NAME = "ReadIt";
+    private static final String APP_ID = "725725";
 
-    private static final String ICON_FILENAME 			= "hello_sdl_icon.png";
+    private static final String ICON_FILENAME = "hello_sdl_icon.png";
     private int iconCorrelationId;
 
     List<String> remoteFiles;
 
-    private static final String WELCOME_SHOW 			= "Welcome to HelloSDL";
-    private static final String WELCOME_SPEAK 			= "Welcome to Hello S D L";
-
-    private static final String TEST_COMMAND_NAME 		= "Test Command";
-    private static final int TEST_COMMAND_ID 			= 1;
+    private static final String TEST_COMMAND_NAME = "Test Command";
+    private static final int TEST_COMMAND_ID = 1;
 
     // variable used to increment correlation ID for every request sent to SYNC
     public int autoIncCorrId = 0;
@@ -114,7 +111,6 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     private boolean firstNonHmiNone = true;
     private boolean isVehicleDataSubscribed = false;
-
 
 
     @Override
@@ -206,7 +202,7 @@ public class SdlService extends Service implements IProxyListenerALM{
     /**
      * Will show a sample test message on screen as well as speak a sample test message
      */
-    public void showTest(){
+    public void showTest() {
         try {
             proxy.show(TEST_COMMAND_NAME, "Command has been selected", TextAlignment.CENTERED, autoIncCorrId++);
             proxy.speak(TEST_COMMAND_NAME, autoIncCorrId++);
@@ -216,9 +212,9 @@ public class SdlService extends Service implements IProxyListenerALM{
     }
 
     /**
-     *  Add commands for the app on SDL.
+     * Add commands for the app on SDL.
      */
-    public void sendCommands(){
+    public void sendCommands() {
         AddCommand command = new AddCommand();
         MenuParams params = new MenuParams();
         params.setMenuName(TEST_COMMAND_NAME);
@@ -231,9 +227,10 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     /**
      * Sends an RPC Request to the connected head unit. Automatically adds a correlation id.
+     *
      * @param request
      */
-    private void sendRpcRequest(RPCRequest request){
+    private void sendRpcRequest(RPCRequest request) {
         request.setCorrelationID(autoIncCorrId++);
         try {
             proxy.sendRPCRequest(request);
@@ -241,8 +238,10 @@ public class SdlService extends Service implements IProxyListenerALM{
             e.printStackTrace();
         }
     }
+
     /**
      * Sends the app icon through the uploadImage method with correct params
+     *
      * @throws SdlException
      */
     private void sendIcon() throws SdlException {
@@ -252,12 +251,13 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     /**
      * This method will help upload an image to the head unit
-     * @param resource the R.drawable.__ value of the image you wish to send
-     * @param imageName the filename that will be used to reference this image
+     *
+     * @param resource      the R.drawable.__ value of the image you wish to send
+     * @param imageName     the filename that will be used to reference this image
      * @param correlationId the correlation id to be used with this request. Helpful for monitoring putfileresponses
-     * @param isPersistent tell the system if the file should stay or be cleared out after connection.
+     * @param isPersistent  tell the system if the file should stay or be cleared out after connection.
      */
-    private void uploadImage(int resource, String imageName,int correlationId, boolean isPersistent){
+    private void uploadImage(int resource, String imageName, int correlationId, boolean isPersistent) {
         PutFile putFile = new PutFile();
         putFile.setFileType(FileType.GRAPHIC_PNG);
         putFile.setSdlFileName(imageName);
@@ -275,6 +275,7 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     /**
      * Helper method to take resource files and turn them into byte arrays
+     *
      * @param resource
      * @return
      */
@@ -307,14 +308,11 @@ public class SdlService extends Service implements IProxyListenerALM{
     @Override
     public void onProxyClosed(String info, Exception e, SdlDisconnectedReason reason) {
 
-        if(!(e instanceof SdlException)){
+        if (!(e instanceof SdlException)) {
             Log.v(TAG, "reset proxy in onproxy closed");
             reset();
-        }
-        else if ((((SdlException) e).getSdlExceptionCause() != SdlExceptionCause.SDL_PROXY_CYCLED))
-        {
-            if (((SdlException) e).getSdlExceptionCause() != SdlExceptionCause.BLUETOOTH_DISABLED)
-            {
+        } else if ((((SdlException) e).getSdlExceptionCause() != SdlExceptionCause.SDL_PROXY_CYCLED)) {
+            if (((SdlException) e).getSdlExceptionCause() != SdlExceptionCause.BLUETOOTH_DISABLED) {
                 Log.v(TAG, "reset proxy in onproxy closed");
                 reset();
             }
@@ -327,29 +325,29 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     @Override
     public void onOnHMIStatus(OnHMIStatus notification) {
-        if(notification.getHmiLevel().equals(HMILevel.HMI_FULL)){
+        if (notification.getHmiLevel().equals(HMILevel.HMI_FULL)) {
             if (notification.getFirstRun()) {
                 // send welcome message if applicable
                 performWelcomeMessage();
             }
+
             // Other HMI (Show, PerformInteraction, etc.) would go here
         }
 
 
-        if(!notification.getHmiLevel().equals(HMILevel.HMI_NONE)
-                && firstNonHmiNone){
+        if (!notification.getHmiLevel().equals(HMILevel.HMI_NONE)
+                && firstNonHmiNone) {
             sendCommands();
             //uploadImages();
             firstNonHmiNone = false;
 
             // Other app setup (SubMenu, CreateChoiceSet, etc.) would go here
-        }else{
+        } else {
             //We have HMI_NONE
-            if(notification.getFirstRun()){
+            if (notification.getFirstRun()) {
                 uploadImages();
             }
         }
-
 
 
     }
@@ -357,13 +355,15 @@ public class SdlService extends Service implements IProxyListenerALM{
     /**
      * Will show a sample welcome message on screen as well as speak a sample welcome message
      */
-    private void performWelcomeMessage(){
+    private void performWelcomeMessage() {
         try {
             //Set the welcome message on screen
-            proxy.show(APP_NAME, WELCOME_SHOW, TextAlignment.CENTERED, autoIncCorrId++);
+            String lastWebSiteText = TextFetcher.getLastWebsite(getApplicationContext());
+            lastWebSiteText = lastWebSiteText.substring(0, 450);
+            proxy.show(APP_NAME, lastWebSiteText, TextAlignment.CENTERED, autoIncCorrId++);
 
             //Say the welcome message
-            proxy.speak(WELCOME_SPEAK, autoIncCorrId++);
+            proxy.speak(lastWebSiteText, autoIncCorrId++);
 
         } catch (SdlException e) {
             e.printStackTrace();
@@ -372,9 +372,9 @@ public class SdlService extends Service implements IProxyListenerALM{
     }
 
     /**
-     *  Requests list of images to SDL, and uploads images that are missing.
+     * Requests list of images to SDL, and uploads images that are missing.
      */
-    private void uploadImages(){
+    private void uploadImages() {
         ListFiles listFiles = new ListFiles();
         this.sendRpcRequest(listFiles);
 
@@ -383,19 +383,19 @@ public class SdlService extends Service implements IProxyListenerALM{
     @Override
     public void onListFilesResponse(ListFilesResponse response) {
         Log.i(TAG, "onListFilesResponse from SDL ");
-        if(response.getSuccess()){
+        if (response.getSuccess()) {
             remoteFiles = response.getFilenames();
         }
 
         // Check the mutable set for the AppIcon
         // If not present, upload the image
-        if(remoteFiles== null || !remoteFiles.contains(SdlService.ICON_FILENAME)){
+        if (remoteFiles == null || !remoteFiles.contains(SdlService.ICON_FILENAME)) {
             try {
                 sendIcon();
             } catch (SdlException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             // If the file is already present, send the SetAppIcon request
             try {
                 proxy.setappicon(ICON_FILENAME, autoIncCorrId++);
@@ -408,7 +408,7 @@ public class SdlService extends Service implements IProxyListenerALM{
     @Override
     public void onPutFileResponse(PutFileResponse response) {
         Log.i(TAG, "onPutFileResponse from SDL");
-        if(response.getCorrelationID().intValue() == iconCorrelationId){ //If we have successfully uploaded our icon, we want to set it
+        if (response.getCorrelationID().intValue() == iconCorrelationId) { //If we have successfully uploaded our icon, we want to set it
             try {
                 proxy.setappicon(ICON_FILENAME, autoIncCorrId++);
             } catch (SdlException e) {
@@ -420,13 +420,13 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     @Override
     public void onOnLockScreenNotification(OnLockScreenStatus notification) {
-        if(!lockscreenDisplayed && notification.getShowLockScreen() == LockScreenStatus.REQUIRED){
+        if (!lockscreenDisplayed && notification.getShowLockScreen() == LockScreenStatus.REQUIRED) {
             // Show lock screen
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
             lockscreenDisplayed = true;
             startActivity(intent);
-        } else if(lockscreenDisplayed && notification.getShowLockScreen() != LockScreenStatus.REQUIRED){
+        } else if (lockscreenDisplayed && notification.getShowLockScreen() != LockScreenStatus.REQUIRED) {
             // Clear lock screen
             clearLockScreen();
         }
@@ -434,16 +434,16 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     private void clearLockScreen() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         lockscreenDisplayed = false;
     }
 
     @Override
-    public void onOnCommand(OnCommand notification){
+    public void onOnCommand(OnCommand notification) {
         Integer id = notification.getCmdID();
-        if(id != null){
-            switch(id){
+        if (id != null) {
+            switch (id) {
                 case TEST_COMMAND_ID:
                     showTest();
                     break;
@@ -453,7 +453,7 @@ public class SdlService extends Service implements IProxyListenerALM{
     }
 
     /**
-     *  Callback method that runs when the add command response is received from SDL.
+     * Callback method that runs when the add command response is received from SDL.
      */
     @Override
     public void onAddCommandResponse(AddCommandResponse response) {
@@ -468,8 +468,8 @@ public class SdlService extends Service implements IProxyListenerALM{
     @Override
     public void onOnPermissionsChange(OnPermissionsChange notification) {
         Log.i(TAG, "Permision changed: " + notification);
-		/* Uncomment to subscribe to vehicle data
-		List<PermissionItem> permissions = notification.getPermissionItem();
+        /* Uncomment to subscribe to vehicle data
+        List<PermissionItem> permissions = notification.getPermissionItem();
 		for(PermissionItem permission:permissions){
 			if(permission.getRpcName().equalsIgnoreCase(FunctionID.SUBSCRIBE_VEHICLE_DATA.name())){
 				if(permission.getHMIPermissions().getAllowed()!=null && permission.getHMIPermissions().getAllowed().size()>0){
@@ -486,7 +486,7 @@ public class SdlService extends Service implements IProxyListenerALM{
 
     @Override
     public void onSubscribeVehicleDataResponse(SubscribeVehicleDataResponse response) {
-        if(response.getSuccess()){
+        if (response.getSuccess()) {
             Log.i(TAG, "Subscribed to vehicle data");
             this.isVehicleDataSubscribed = true;
         }
@@ -788,4 +788,18 @@ public class SdlService extends Service implements IProxyListenerALM{
         // TODO Auto-generated method stub
     }
 
+
+    void readText(String ttsText) {
+        try {
+//            proxy.show(ttsText,ttsText, TextAlignment.CENTERED, autoIncCorrId++);
+
+            if (proxy == null) {
+                startProxy();
+            }
+
+            proxy.speak(ttsText, 2376);
+        } catch (SdlException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
