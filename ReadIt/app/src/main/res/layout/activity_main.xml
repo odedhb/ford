@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fordsyncapp.readit.MainActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-
+android:elevation="2dp"
             android:background="@drawable/text_background"
             android:orientation="vertical"
             android:layout_weight="4"
@@ -35,10 +36,9 @@
 
             <View
                 android:layout_width="20dp"
-               android:layout_marginLeft="4dp"
+                android:layout_marginLeft="4dp"
                 android:background="#000000"
-                android:layout_height="2dp"
-                />
+                android:layout_height="2dp" />
 
             <TextView
                 android:id="@+id/main_view"
@@ -49,23 +49,8 @@
 
                 android:text="Sample article text Sample article text Sample article text Sample article text Sample article text Sample article text Sample article text Sample article text " />
 
+
         </LinearLayout>
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:layout_height="wrap_content">
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="play"
-                android:text="Play" />
-
-
-        </RelativeLayout>
 
 
         <RelativeLayout
@@ -81,7 +66,7 @@
                 android:layout_height="100dp"
                 android:onClick="playSports"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:drawableTop="@drawable/sports_icon"
                 android:text="Sports"
                 android:background="#2C2B2F"
@@ -100,7 +85,7 @@
                 android:src="@drawable/technology_icon"
                 android:layout_height="100dp"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:drawableTop="@drawable/technology_icon"
                 android:text="Technology"
                 android:background="#2C2B2F"
@@ -113,6 +98,26 @@
 
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:layout_marginRight="8dp"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:onClick="play"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/play_button" />
+
+
+    </RelativeLayout>
+
 </RelativeLayout>
 
 
