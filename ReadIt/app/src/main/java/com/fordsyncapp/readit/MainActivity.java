@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void playSports(View view) {
-        fetchUrl("http://sports.yahoo.com/blogs/nfl-shutdown-corner/nfl--greg-hardy-comments--do-not-reflect-values-of-the-league-145138531.html");
+        fetchUrl("http://deadspin.com/report-steve-sarkisian-is-taking-a-leave-of-absence-1735956791");
     }
 
     public void playTech(View view) {
